@@ -49,12 +49,12 @@ int main(void) {
     scanf("%d", &port);
     getchar(); // Consuma newline
 
-    // --- USO DI gethostbyname (PDF pag. 3 e 8) ---
-    // Risoluzione da nome simbolico a indirizzo Internet [cite: 14]
+    // --- USO DI gethostbyname ---
+    // Risoluzione da nome simbolico a indirizzo Internet 
     struct hostent *host;
-    host = gethostbyname(serverNameStr); // [cite: 17, 85]
+    host = gethostbyname(serverNameStr);
 
-    if (host == NULL) { // [cite: 19, 86]
+    if (host == NULL) {
         fprintf(stderr, "gethostbyname() failed. Host non trovato.\n");
         closesocket(Csocket);
         ClearWinSock();
@@ -65,8 +65,6 @@ int main(void) {
     memset(&sad, 0, sizeof(sad));
     sad.sin_family = AF_INET;
     sad.sin_port = htons(port);
-    // Copia dell'indirizzo dalla struttura hostent alla struct sockaddr_in
-    // h_addr è definito come h_addr_list[0] [cite: 30]
     memcpy(&sad.sin_addr, host->h_addr, host->h_length); 
 
     int serverLen = sizeof(sad);
@@ -101,7 +99,7 @@ int main(void) {
         response[bytesRcvd] = '\0';
         
         // Risoluzione INVERSA: dall'indirizzo IP ricevuto al nome del server
-        // Uso gethostbyaddr come da PDF pag. 5 
+        // Uso gethostbyaddr
         struct hostent *serverInfo;
         serverInfo = gethostbyaddr((char *)&fromAddr.sin_addr, 4, AF_INET);
 

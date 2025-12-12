@@ -4,14 +4,14 @@
 #include <ctype.h>
 
 #if defined _WIN32
-    #include <winsock.h> //
+    #include <winsock.h>
 #else
     #define closesocket close
     #include <sys/socket.h>
     #include <netinet/in.h>
     #include <arpa/inet.h>
     #include <unistd.h>
-    #include <netdb.h> //
+    #include <netdb.h>
 #endif
 
 #define PROTOPORT 27015
@@ -48,7 +48,7 @@ int main(int argc, char **argv) {
         port = atoi(argv[1]);
     }
 
-    // --- Inizializzazione Winsock (come da slide 7) ---
+    // --- Inizializzazione Winsock ---
 #if defined _WIN32
     WSADATA wsaData;
     int iResult = WSAStartup(MAKEWORD(2,2), &wsaData);
@@ -93,9 +93,7 @@ int main(int argc, char **argv) {
         if (bytesRcvd > 0) {
             buf[bytesRcvd] = '\0';
 
-            // --- USO DELLE FUNZIONI DEL PDF PER RISOLVERE IL NOME ---
             // Usiamo gethostbyaddr per passare da IP a Nome Simbolico
-            // Signature: struct hostent * gethostbyaddr(const char* addr, int len, int type);
             
             struct hostent *remoteHost;
             remoteHost = gethostbyaddr((char *)&cad.sin_addr, 4, AF_INET);
@@ -107,7 +105,7 @@ int main(int argc, char **argv) {
                 clientName = "Sconosciuto (risoluzione fallita)";
             }
 
-            // Visualizzazione dati client (Punto 3 della traccia)
+            // Visualizzazione dati client
             printf("\n------------------------------------------------\n");
             printf("Ricevuti dati dal client.\n");
             printf("Messaggio: '%s'\n", buf);
