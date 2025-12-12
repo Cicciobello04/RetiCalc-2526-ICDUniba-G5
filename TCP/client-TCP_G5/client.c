@@ -14,8 +14,8 @@
 #include <unistd.h> // for close()
 #endif
 
-#define PROTOPORT 5193 // default protocol port number (non usato qui)
-#define BUFFERSIZE 512 // size of request queue
+#define PROTOPORT 5193
+#define BUFFERSIZE 512 
 #define SERVERPORT 27015
 
 // Funzione di utilità per pulire Winsock, chiamata solo se in ambiente Windows

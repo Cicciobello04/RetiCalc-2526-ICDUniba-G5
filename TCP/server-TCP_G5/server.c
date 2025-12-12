@@ -16,9 +16,9 @@
 #include <errno.h> // *** NUOVA INCLUSIONE POSIX: Importante per la gestione errori ***
 #endif
 
-#define PROTOPORT 27015 // default protocol port number
-#define QLEN 6 // size of request queue
-#define BUFFERSIZE 512 // size of request queue
+#define PROTOPORT 27015
+#define QLEN 6
+#define BUFFERSIZE 512
 
 // Funzione di utilità per pulire Winsock, chiamata solo se in ambiente Windows
 void ClearWinSock() {
